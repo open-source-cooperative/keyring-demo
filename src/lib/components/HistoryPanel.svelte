@@ -18,7 +18,7 @@
 	}
 
 	let entries: ListItem[] = $derived(
-		$history.map((entry) => {
+		$history.toReversed().map((entry) => {
 			let name = `Entry ${entry.id}`;
 			if (entry.is_specifier) {
 				name += ` (${entry.service}, ${entry.user})`;
@@ -31,7 +31,7 @@
 					selected = entry;
 				}
 			};
-			return { name, current, onclick } as ListItem;
+			return { name, current, onclick, props= } as ListItem;
 		})
 	);
 </script>

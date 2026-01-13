@@ -1,8 +1,8 @@
 import {
-	entryDeleteValue,
 	entryGetValue,
 	entryNew,
 	entrySetValue,
+	removeEntry,
 	type VoidResult
 } from '$lib/commands';
 
@@ -38,6 +38,7 @@ function createSampleEntry(entry: SampleEntry, handler: (result: VoidResult) => 
 				let value = entry.password ? `UTF8:${entry.password}` : `HEX:${entry.secret ?? ''}`;
 				entrySetValue(result.value!.id, value, (result2) => {
 					if (result2.error) {
+						removeEntry(result.value!.id, () => {});
 						handler({ error: result2.error } as VoidResult);
 					} else {
 						handler({});

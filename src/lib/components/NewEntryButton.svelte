@@ -44,7 +44,7 @@
 	}
 </script>
 
-<Button color="light" onclick={() => (entryModal = true)}>New Entry</Button>
+<Button onclick={() => (entryModal = true)}>New Entry</Button>
 <Modal title="New Entry" form bind:open={entryModal} onaction={entryModalAction} class="w-[400px]">
 	<div>
 		<Label for="service">Service:</Label>

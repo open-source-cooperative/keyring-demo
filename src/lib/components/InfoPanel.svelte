@@ -1,12 +1,6 @@
 <script lang="ts">
-	import {
-		entryDeleteValue,
-		entryGetAttributes,
-		entryGetValue,
-		entrySetValue,
-		type HistoryEntry
-	} from '$lib/commands';
-	import { Alert, Button, Heading, Input, Label, List, Li, Modal, P } from 'flowbite-svelte';
+	import {entryDeleteValue, entryGetAttributes, entryGetValue, entrySetValue, type HistoryEntry} from '$lib/commands';
+	import {Alert, Button, Input, Label, Li, List, Modal, P} from 'flowbite-svelte';
 
 	let { selected }: { selected: HistoryEntry | undefined } = $props();
 
@@ -99,7 +93,7 @@
 </script>
 
 <div class="flex justify-center">
-	<Heading tag="h5">{name}</Heading>
+	<P size="lg" weight="bold">{name}</P>
 </div>
 {#if selected}
 	{#if selected.is_specifier}
@@ -110,8 +104,8 @@
 	{/if}
 	<div class="m-2 space-y-4 border-t border-gray-200 px-2">
 		<div class="align-center mt-2 flex gap-2">
-			<Button onclick={retrieveValue} color="light">Retrieve Data</Button>
-			<Button onclick={() => (dataModal = true)} color="light">Update Data</Button>
+			<Button onclick={retrieveValue}>Retrieve Data</Button>
+			<Button onclick={() => (dataModal = true)}>Update Data</Button>
 		</div>
 		<Modal title="Update Data" form bind:open={dataModal} onaction={dataModalAction} class="w-100">
 			<div>
@@ -135,7 +129,7 @@
 	</div>
 	<div class="m-2 space-y-4 border-t border-gray-200 px-2">
 		<div class="mt-2">
-			<Button onclick={retrieveAttributes} color="light">Retrieve Attributes</Button>
+			<Button onclick={retrieveAttributes}>Retrieve Attributes</Button>
 		</div>
 		{#if attributes}
 			{#if attributes.length === 0}
