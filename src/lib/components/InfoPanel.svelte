@@ -110,7 +110,7 @@
 		<Modal title="Update Data" form bind:open={dataModal} onaction={dataModalAction} class="w-100">
 			<div>
 				<Label for="password">Password:</Label>
-				<Input type="text" name="password" />
+				<Input type="text" name="password" autocapitalize="none" autocomplete="off" autocorrect="off" />
 				<Button type="submit" value="set-password" color="green">Set Password</Button>
 			</div>
 			<Button type="submit" value="delete-value" color="red">Delete Credential</Button>

@@ -45,14 +45,14 @@
 </script>
 
 <Button onclick={() => (entryModal = true)}>New Entry</Button>
-<Modal title="New Entry" form bind:open={entryModal} onaction={entryModalAction} class="w-[400px]">
+<Modal title="New Entry" form bind:open={entryModal} onaction={entryModalAction} class="w-100">
 	<div>
 		<Label for="service">Service:</Label>
-		<Input type="text" name="service" />
+		<Input type="text" name="service" autocapitalize="none" autocomplete="off" autocorrect="off" />
 	</div>
 	<div>
 		<Label for="user">User:</Label>
-		<Input type="text" name="user" />
+		<Input type="text" name="user" autocapitalize="none" autocomplete="off" autocorrect="off" />
 	</div>
 	<Button type="submit" value="create" color="green">Create Entry</Button>
 	<Button outline type="submit" value="cancel">Cancel</Button>
