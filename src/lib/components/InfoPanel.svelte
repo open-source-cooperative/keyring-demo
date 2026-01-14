@@ -103,7 +103,7 @@
 		</div>
 	{/if}
 	<div class="m-2 space-y-4 border-t border-gray-200 px-2">
-		<div class="align-center mt-2 flex gap-2">
+		<div class="grid grid-cols-2 gap-2 mt-2">
 			<Button onclick={retrieveValue}>Retrieve Data</Button>
 			<Button onclick={() => (dataModal = true)}>Update Data</Button>
 		</div>
@@ -120,7 +120,7 @@
 			{#if value.startsWith('UTF8:')}
 				<P class="font-normal"><span class="font-semibold">Password:</span> {value.substring(5)}</P>
 			{:else}
-				<P class="font-normal"><span class="font-semibold">Secret:</span> {value.substring(4)}</P>
+				<P class="font-normal"><span class="font-semibold">Secret (hex):</span> {value.substring(4)}</P>
 			{/if}
 		{/if}
 		{#if valueError}
@@ -128,7 +128,7 @@
 		{/if}
 	</div>
 	<div class="m-2 space-y-4 border-t border-gray-200 px-2">
-		<div class="mt-2">
+		<div class="grid grid-cols-2 gap-2 mt-2">
 			<Button onclick={retrieveAttributes}>Retrieve Attributes</Button>
 		</div>
 		{#if attributes}
