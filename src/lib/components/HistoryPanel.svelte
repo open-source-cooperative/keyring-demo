@@ -24,6 +24,8 @@
 			let name = `Entry ${entry.id}`;
 			if (entry.is_specifier) {
 				name += ` (${entry.service}, ${entry.user})`;
+			} else {
+				name += ` [wrapper]`
 			}
 			let current = entry.id === selected?.id;
 			let cls = current ? base_class + " bg-primary-300 hover:bg-primary-400" : base_class +" hover:bg-primary-100"
