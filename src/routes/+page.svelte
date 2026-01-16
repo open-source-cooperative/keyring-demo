@@ -2,8 +2,8 @@
 	import HomeScreen from '$lib/components/HomeScreen.svelte';
 </script>
 
-<div class="flex w-full items-center justify-center bg-gray-200">
-	<div class="h-[95vh] w-full overflow-auto rounded-xl bg-white">
+<div class="flex w-full items-center justify-center">
+	<div class="w-full overflow-auto">
 		<HomeScreen />
 	</div>
 </div>

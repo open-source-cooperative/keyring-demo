@@ -1,6 +1,6 @@
 [package]
 name = "keyring-demo"
-version = "1.0.0"
+version = "1.0.0-beta.2"
 description = "Rust back-end for keyring Tauri app"
 authors = ["Daniel Brotsky <dev@brotsky.com>"]
 edition = "2021"
@@ -14,15 +14,14 @@ tauri-build = { version = "2", features = [] }
 
 [dependencies]
 hex = "0.4.3"
-indexmap = "2.12.1"
-keyring = "4.0.0-alpha.6"
+indexmap = "2.13.0"
+keyring = "4.0.0-beta.3"
 keyring-core = "0.7.2"
 serde = { version = "1.0.228", features = ["derive"] }
 tauri = { version = "2.9.5", features = [] }
 tauri-plugin-os = "2.3.2"
 
 [patch.crates-io]
-keyring = { version = "4.0.0-alpha.6", git = "https://github.com/open-source-cooperative/keyring-rs", branch = "next" }
 android-native-keyring-store = { git = "https://github.com/open-source-cooperative/android-native-keyring-store.git", branch = "next" }
 apple-native-keyring-store = { git = "https://github.com/open-source-cooperative/apple-native-keyring-store.git", branch = "next" }
 dbus-secret-service-keyring-store = { git = "https://github.com/open-source-cooperative/dbus-secret-service-keyring-store.git", branch = "next" }

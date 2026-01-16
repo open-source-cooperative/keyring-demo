@@ -47,4 +47,4 @@
 	}
 </script>
 
-<Button color="light" onclick={addSampleData}>Add Sample Data</Button>
+<Button onclick={addSampleData}>Add Samples</Button>

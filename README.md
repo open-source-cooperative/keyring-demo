@@ -62,6 +62,22 @@ In order to distribute Android apps through Google Play you must be a Google Pla
 
 ### CrabNebula
 
+To do anything on CrabNebula, you must set up the environment variable `CN_API_KEY` to have your API key. Then:
+
+* Create a release with this command:
+  ```shell
+   cn release draft brotskydotcom/keyring-demo "v1.0.0-beta.2" --notes "This is the second beta of the Keyring Demo app. It's designed to layout well on phone as well as tablet and desktop."
+  ```
+
+  Be sure to not the `id` of the generated release (printed to stdout). You will need it in the upload commands.
+
+* On each platform (Windows, Mac, Linux), after having generated your bundles, upload them using this command:
+  ```shell
+  cn release upload brotskydotcom/keyring-demo 01KF238DNTSGSHR77DFJH20PEX --framework tauri
+  ```
+
+  where `01KF238DNTSGSHR77DFJH20PEX` is the `id` generated when the release draft was created.
+
 ### Debian (Ubuntu)
 
 In addition to Rust and an up-to-date Node/Npm, you need to have these packages installed on Debian to build the app:

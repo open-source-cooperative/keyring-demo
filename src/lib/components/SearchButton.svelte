@@ -46,4 +46,4 @@
 	}
 </script>
 
-<Button color="light" onclick={search}>Search All</Button>
+<Button onclick={search}>Search All</Button>
