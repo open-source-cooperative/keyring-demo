@@ -43,6 +43,9 @@
 			"bundleVersion": "1.0.4",
 			"minimumSystemVersion": "12.0",
 			"signingIdentity": "3rd Party Mac Developer Application: Daniel Brotsky (85H73V9R3F)"
+		},
+		"windows": {
+			"wix": { "version": "1.0.0.2" }
 		}
 	}
 }
