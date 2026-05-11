@@ -14,12 +14,12 @@ tauri-build = { version = "2", features = [] }
 
 [dependencies]
 hex = "0.4.3"
-indexmap = "2.13.0"
+indexmap = "2.14.0"
 keyring = "4.0.0"
 keyring-core = "1.0.0"
 ndk-context = "0.1.1"
 serde = { version = "1.0.228", features = ["derive"] }
-tauri = { version = "2.9.5", features = [] }
+tauri = { version = "2.11.1", features = [] }
 tauri-plugin-os = "2.3.2"
 
 [target.'cfg(target_os = "android")'.dependencies]

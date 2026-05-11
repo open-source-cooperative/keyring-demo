@@ -71,7 +71,7 @@ pub fn run() {
 #[cfg(target_os = "android")]
 #[allow(non_snake_case)]
 #[unsafe(no_mangle)]
-pub extern "system" fn Java_com_brotsky_keyring_1demo_MainActivity_init_1ndk_1context(
+pub extern "system" fn Java_com_brotsky_keyring_1demo_MainActivity_initNdkContext(
     env: jni::JNIEnv,
     _class: jni::objects::JObject,
     context: jni::objects::JObject,
