@@ -1,6 +1,6 @@
 [package]
 name = "keyring-demo"
-version = "1.0.0-beta.2"
+version = "1.0.0"
 description = "Rust back-end for keyring Tauri app"
 authors = ["Daniel Brotsky <dev@brotsky.com>"]
 edition = "2021"
@@ -15,16 +15,15 @@ tauri-build = { version = "2", features = [] }
 [dependencies]
 hex = "0.4.3"
 indexmap = "2.13.0"
-keyring = "4.0.0-beta.3"
-keyring-core = "0.7.2"
+keyring = "4.0.0"
+keyring-core = "1.0.0"
+ndk-context = "0.1.1"
 serde = { version = "1.0.228", features = ["derive"] }
 tauri = { version = "2.9.5", features = [] }
 tauri-plugin-os = "2.3.2"
 
-[patch.crates-io]
-android-native-keyring-store = { git = "https://github.com/open-source-cooperative/android-native-keyring-store.git", branch = "next" }
-apple-native-keyring-store = { git = "https://github.com/open-source-cooperative/apple-native-keyring-store.git", branch = "next" }
-dbus-secret-service-keyring-store = { git = "https://github.com/open-source-cooperative/dbus-secret-service-keyring-store.git", branch = "next" }
-linux-keyutils-keyring-store = { git = "https://github.com/open-source-cooperative/linux-keyutils-keyring-store.git", branch = "next" }
-windows-native-keyring-store = { git = "https://github.com/open-source-cooperative/windows-native-keyring-store.git", branch = "next" }
-zbus-secret-service-keyring-store = { git = "https://github.com/open-source-cooperative/zbus-secret-service-keyring-store.git", branch = "next" }
+[target.'cfg(target_os = "android")'.dependencies]
+android_log-sys = "0.3.2"
+jni = "0.21.1"
+tracing = "0.1"
+tracing-subscriber = "0.3.23"
