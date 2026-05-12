@@ -9,28 +9,33 @@ You can download releases of the app using the info on the [releases page](https
 
 The documentation for using the app is on the [Keyring ecosystem wiki](https://github.com/open-source-cooperative/keyring-rs/wiki/Keyring). This document provides instructions for how to install and to build the app for various platforms.
 
-_Everything below this line is in progress!!_
 ***
 
 ## Installation Instructions
 
-Various platforms can use apps distributed through various channels. This list is organized by platform.
+Pre-built installers for this app are available for all supported platforms. (The macOS installer is available both for direct download and via the macOS App Store.)
 
-### macOS
+### Linux/Windows/macOS
 
-You will be able to get Keyring Demo through the Mac App Store once it’s approved. For now, you can get the public beta by request to @brotskydotcom on GitHub. The version that’s available from the App Store is a sandboxed app, so it has access to both to Keychain Services credentials and to Protected Data credentials.
+Builds for all three of these platforms can be [downloaded from CrabNebula](https://web.crabnebula.cloud/brotskydotcom/keyring-demo/releases).
 
-You will be able to get Keyring Demo through 
+### iOS/macOS
 
-Note: All distributed versions on macOS run only on Apple Silicon machines. It’s possible to build the app for the older x86 machines, but because those machines don’t have protected data you will only have access to the Keychain.
+You will be able to get Keyring Demo through the App Store once it’s approved. For now, you can get the public beta at [this link](). The version that’s available from the App Store is a sandboxed app, so on macOS it has access to both to Keychain Services credentials and to Protected Data credentials.
+
+Note: The App Store macOS version runs on Apple Silicon machines only. It’s possible to build the app for the older x86 machines, but because those machines don’t have protected data you will only have access to the Keychain.
+
+### Android
+
+There is a Google Play private beta build of Keyring Demo available by sending email to `keyring-demo` at domain `brotsky.com`. Once we get enough users of that build, it will update to being a public beta and (eventually) released.
 
 ## Build Instructions
 
-Various platforms can use apps distributed through various channels. This list is organized by distribution channel.
+This list is organized by distribution channel rather than by platform.
 
 ### Apple App Store
 
-In order to distribute through the Apple App Store, you must be an Apple Developer. The Tauri 2.0 documentation has tons of information about how developers configure their builds so they are signed correctly for App Store upload. The configuration files in this repo have all been configured correctly for the `brotskydotcom` App Store developer, team ID `85H73V9R3F`. In order for you to publish this app under your own team ID, you will need to alter all the configuration files to use a bundle ID that *you* have registered under your own team ID, and to refer to your own signing certificates and so on.
+In order to distribute through the Apple App Store, you must be an Apple Developer. The Tauri 2.0 documentation has tons of information about how developers configure their builds so they are signed correctly for App Store upload. The configuration files in this repo have all been configured correctly for the `brotskydotcom` App Store developer, team ID `85H73V9R3F`. In order for you to publish this app under your own team ID, you will need to alter all the configuration files to use a bundle ID that *you* have registered under your own team ID, to refer to your own signing certificates, and so on.
 
 To build the iOS app for the app store, follow these steps:
 
@@ -56,21 +61,23 @@ To build the iOS app for the app store, follow these steps:
 
 To build the macOS app for the app store, follow these steps (after having fixed all the configuration files):
 
-1. (only needed if on a pre-release version) Edit the `src-tauri/taur.config.json` file and *temporarily* remove any pre-release designation after the main version number. (The main version number can only be numeric for macOS.) In the last step you will restore this designator.
+1. (only needed if on a pre-release version) Edit the `src-tauri/tauri.config.json` file and *temporarily* remove any pre-release designation after the main version number. (The main version number can only be numeric for macOS.) In the last step you will restore this designator.
 
 2. Edit the `src-tauri/tauri.conf.json` file and change the `macOS > bundleVersion` parameter to be one patch version greater than it was. So, for example, if it was `1.0.4`, you would change it to `1.0.5`. This ensures that the build number is higher than the one last uploaded to the app store, which is a requirement.
 
-3. Give this sequence of commands, replacing `85H73V9R3F` with your Team ID, `SSD3DPQ9MU` with your AppStoreConnect API Key ID, and `69a6de7e-5cea-47e3-e053-5b8c7c11a4d1` with your AppStoreConnect API Issuer ID:
+3. Edit the `src-tauri/tauri.appstore.conf.json` file and change the path value of the `embedded.provisionprofile` to point to your App Store Mac 3rd party developer installer provisioning profile.
+
+4. Give this sequence of commands, replacing `85H73V9R3F` with your Team ID, `SSD3DPQ9MU` with your AppStoreConnect API Key ID, `69a6de7e-5cea-47e3-e053-5b8c7c11a4d1` with your AppStoreConnect API Issuer ID, and `1606491991` with the Apple Id found in the the App Information section for your registered application in AppStoreConnect:
    ```shell
    npm run tauri build -- --no-bundle
    npm run tauri bundle -- --bundles app --config src-tauri/tauri.appstore.conf.json
    pushd src-tauri/target/release/bundle/macos
    xcrun productbuild --sign "85H73V9R3F" --component "keyring-demo.app" /Applications "keyring-demo.pkg"
-   xcrun altool --upload-app --type macos --file "keyring-demo.pkg" --apiKey SSD3DPQ9MU --apiIssuer 69a6de7e-5cea-47e3-e053-5b8c7c11a4d1
+   xcrun altool --upload-app --type macos --file "keyring-demo.pkg" --apiKey SSD3DPQ9MU --apiIssuer 69a6de7e-5cea-47e3-e053-5b8c7c11a4d1 --apple-id 1606491991
    popd
    ```
 
-4. (only needed if on a pre-release version) Put the pre-release version designator back (see step 1).
+5. (only needed if on a pre-release version) Put the pre-release version designator back (see step 1).
 
 ### Google Play
 
@@ -82,41 +89,35 @@ To build the signed app bundle for Android, follow these steps:
 
 2. Give this build command:
    ```shell
-   tauri android build --aab true
+   npm run tauri android build --aab true
    ```
 
 Now you can open the `src-tauri/gen/android/app/build/outputs/bundle/universalRelease` folder and drag the built `.aab` bundle into a new release on the Google Play Console.
 
-
-
 ### CrabNebula
 
-To do anything on CrabNebula, you must set up the environment variable `CN_API_KEY` to have your API key. Then:
+There are two steps to releasing on CrabNebula: building your bundles, and then uploading them to a release.
 
-* Create a release with this command:
+For building on Mac, Win, and Linux, see the GitHub `build-tauri` workflow in this repository.
+
+To release anything on CrabNebula, you first have to register with them and create a project. Having done that, follow these steps:
+
+* Set up the environment variable `CN_API_KEY` to have your API key.
+  
+* Create a release with this command (changing the release name and the notes, obviously):
+  
   ```shell
    cn release draft brotskydotcom/keyring-demo "v1.0.0-beta.2" --notes "This is the second beta of the Keyring Demo app. It's designed to layout well on phone as well as tablet and desktop."
   ```
-
-  Be sure to not the `id` of the generated release (printed to stdout). You will need it in the upload commands.
-
-* On each platform (Windows, Mac, Linux), after having generated your bundles, upload them using this command:
+  
+  Be sure to note the `id` of the generated release (printed to stdout). You will need it in the upload commands.
+  
+* Having generated your bundles, upload them using this command:
   ```shell
-  cn release upload brotskydotcom/keyring-demo 01KF238DNTSGSHR77DFJH20PEX --framework tauri
+  cn release upload brotskydotcom/keyring-demo <id> --framework tauri
   ```
 
-  where `01KF238DNTSGSHR77DFJH20PEX` is the `id` generated when the release draft was created.
-
-### Debian (Ubuntu)
-
-In addition to Rust and an up-to-date Node/Npm, you need to have these packages installed on Debian to build the app:
-
-* build-essentials (meta-package) - this is also needed for Rust, of course
-* libgtk2.0-dev 
-* libgtk-3-dev
-* libjavascriptcoregtk-4.1-dev
-* libsoup-3.0-dev
-* libwebkit2gtk-4.1-dev
+  where `<id>` is the `id` generated when the release draft was created.
 
 ## License
 
