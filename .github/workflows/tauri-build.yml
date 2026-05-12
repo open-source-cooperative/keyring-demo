@@ -1,6 +1,9 @@
 name: 'tauri-build'
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - next
 
 jobs:
   tauri-build:
