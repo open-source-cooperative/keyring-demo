@@ -5,7 +5,7 @@ This directory contains a Tauri v2.0 cross-platform app that serves two purposes
 - It provides sample code for developers on how to integrate the keyring ecosystem into their apps.
 - It allows users and developers both with the ability to poke around in the keyring-compatible stores used by their apps.
 
-You can download releases of the app using the info on the [releases page](https://github.com/open-source-cooperative/keyring-demo/releases).
+You can download releases of the app using the [info about installation](#installation-instructions) below.
 
 The documentation for using the app is on the [Keyring ecosystem wiki](https://github.com/open-source-cooperative/keyring-rs/wiki/Keyring). This document provides instructions for how to install and to build the app for various platforms.
 
