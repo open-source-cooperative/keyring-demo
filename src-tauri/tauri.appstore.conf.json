@@ -1,9 +1,10 @@
 {
 	"bundle": {
 		"macOS": {
+			"signingIdentity": "37503988C58B6DC963CC105BB17D3660F790BAF8",
 			"entitlements": "./Entitlements.plist",
 			"files": {
-				"embedded.provisionprofile": "/Users/dbrotsky/.appstoreconnect/profiles/Keyring_Demo_MacAppStore_Profile.provisionprofile"
+				"embedded.provisionprofile": "./apple-distribution.provisionprofile"
 			}
 		}
 	}
