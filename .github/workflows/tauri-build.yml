@@ -58,6 +58,13 @@ jobs:
           p12-file-base64: ${{ secrets.APPSTORE_CERTIFICATES_FILE_BASE64 }}
           p12-password: ${{ secrets.APPSTORE_CERTIFICATES_FILE_PASSWORD }}
 
+      - name: Add Notarization Data
+        if: matrix.platform == 'macos-latest'
+        run: |
+          echo "APPLE_ID=${{ secrets.NOTARIZATION_APPLE_ID }}" >> $GITHUB_ENV
+          echo "APPLE_ID_PASSWORD=${{ secrets.NOTARIZATION_APPLE_ID_PASSWORD }}" >> $GITHUB_ENV
+          echo "APPLE_TEAM_ID=${{ secrets.NOTARIZATION_APPLE_TEAM_ID }}" >> $GITHUB_ENV
+
       - name: install frontend dependencies
         run: npm install
 
