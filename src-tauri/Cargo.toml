@@ -1,6 +1,6 @@
 [package]
 name = "keyring-demo"
-version = "1.0.0"
+version = "1.0.1"
 description = "Rust back-end for keyring Tauri app"
 authors = ["Daniel Brotsky <dev@brotsky.com>"]
 edition = "2021"
@@ -15,7 +15,7 @@ tauri-build = { version = "2", features = [] }
 [dependencies]
 hex = "0.4.3"
 indexmap = "2.14.0"
-keyring = "4.0.1"
+keyring = { version="4.1.0", no-default-features = true, features = ["cli"] }
 keyring-core = "1.0.0"
 ndk-context = "0.1.1"
 serde = { version = "1.0.228", features = ["derive"] }
